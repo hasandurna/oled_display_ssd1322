@@ -66,21 +66,6 @@ static void MX_SPI2_Init(void);
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 
-
-
-static void draw_centered_at_y(const char *s, int y)
-{
-    int len = strlen(s);
-    int total_width = len * 6 + (len - 1); // 6px karakter + 1px boşluk
-    //    int x0 = (64 - total_width) / 2;
-    int x0 = (128 - total_width) / 2;
-    if (x0 < 0) x0 = 0; // sığmıyorsa sola yapıştır
-    for (int i = 0; i < len; i++) {
-        SSD1322_DrawChar(x0 + i * 7, y, s[i]); // 6px + 1px boşluk
-    }
-}
-
-
 /* USER CODE END 0 */
 
 /**
@@ -132,26 +117,16 @@ HAL_HSEM_FastTake(HSEM_ID_0);
   /* USER CODE BEGIN 2 */
 
   SSD1322_Init();
-  HAL_Delay(50);
 
+  SSD1322_DrawStringCentered("NASA SPACE");
+  HAL_Delay(1000);
 
-
-
-
-  SSD1322_Init();
-  HAL_Delay(50);
-  SSD1322_SendCommandWithData(0xA0, (uint8_t[]){0x16, 0x11}, 2); // remap
-  SSD1322_SendCommandWithData(0xA1, (uint8_t[]){0x00}, 1);
-  SSD1322_SendCommandWithData(0xA2, (uint8_t[]){0x00}, 1);
-  SSD1322_SetColumn(COLUMN_START, COLUMN_END);
-  SSD1322_SetRow(ROW_START, ROW_END);
-  SSD1322_ClearFramebuffer();
-
-  draw_centered_at_y("TAI", 16);
-  draw_centered_at_y("Space", 32);
-
+  draw_centered_at_y("deneme satir 1", 7);
+  draw_centered_at_y("deneme satir 2", 27);
+  draw_centered_at_y("deneme satir 3", 47);
 
   SSD1322_RefreshFromFramebuffer();
+
 
 
 
@@ -169,7 +144,7 @@ HAL_HSEM_FastTake(HSEM_ID_0);
     /* USER CODE BEGIN 3 */
 
 
-      HAL_Delay(1000);
+
 
   }
   /* USER CODE END 3 */
