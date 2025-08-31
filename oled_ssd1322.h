@@ -68,6 +68,7 @@ void SSD1322_SetColumn(uint8_t a, uint8_t b);
 void SSD1322_SetRow(uint8_t a, uint8_t b);
 void SSD1322_DrawGridTest(void);
 void SSD1322_SetPixel(int x, int y, uint8_t gray);
+void draw_centered_at_y(const char *s, int y);
 void pixel_grid_test(void);
 
 
