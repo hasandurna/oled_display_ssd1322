@@ -118,6 +118,7 @@ HAL_HSEM_FastTake(HSEM_ID_0);
 
   SSD1322_Init();
 
+  // Original simple test
   SSD1322_DrawStringCentered("NASA SPACE");
   HAL_Delay(1000);
 
@@ -126,6 +127,44 @@ HAL_HSEM_FastTake(HSEM_ID_0);
   draw_centered_at_y("deneme satir 3", 47);
 
   SSD1322_RefreshFromFramebuffer();
+  HAL_Delay(2000);
+  
+  // Demonstrate new enhanced features
+  SSD1322_ClearFramebuffer();
+  
+  // Test different text sizes
+  SSD1322_SetTextSize(1);
+  SSD1322_SetTextColor(3);
+  SSD1322_SetCursor(0, 0);
+  SSD1322_PrintString("Enhanced Driver\n");
+  
+  SSD1322_SetTextSize(2);
+  SSD1322_SetTextColor(2);
+  SSD1322_PrintString("Size 2\n");
+  
+  SSD1322_SetTextSize(1);
+  SSD1322_SetTextColor(1);
+  SSD1322_PrintString("With wrapping text");
+  
+  SSD1322_RefreshFromFramebuffer();
+  HAL_Delay(3000);
+  
+  // Test bitmap rendering
+  SSD1322_ClearFramebuffer();
+  uint8_t demo_bitmap[] = {
+      0xFF, 0x00, 0xFF, 0x00,
+      0x00, 0xFF, 0x00, 0xFF,
+      0xFF, 0x00, 0xFF, 0x00,
+      0x00, 0xFF, 0x00, 0xFF
+  };
+  SSD1322_Draw4bppBitmap(50, 20, 8, 4, demo_bitmap);
+  
+  SSD1322_SetTextSize(1);
+  SSD1322_SetTextColor(3);
+  SSD1322_SetCursor(0, 50);
+  SSD1322_PrintString("Bitmap demo");
+  SSD1322_RefreshFromFramebuffer();
+  HAL_Delay(2000);
 
 
 

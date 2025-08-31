@@ -41,6 +41,22 @@ void SSD1322_DrawChar(int x, int y, char c);
 void SSD1322_DrawStringCentered(const char *s);
 void SSD1322_DrawStringAtOffset(const char *s, int y, int offset);
 
+/* Advanced font management functions */
+void SSD1322_SetTextSize(uint8_t size);
+void SSD1322_SetTextColor(uint8_t color);
+void SSD1322_SetTextWrap(bool wrap);
+uint8_t SSD1322_GetTextSize(void);
+uint8_t SSD1322_GetTextColor(void);
+bool SSD1322_GetTextWrap(void);
+
+/* Advanced drawing functions */
+void SSD1322_DrawString(int x, int y, const char *str);
+void SSD1322_DrawCharAdvanced(int x, int y, char c, uint8_t size, uint8_t color);
+void SSD1322_PrintChar(char c);
+void SSD1322_PrintString(const char *str);
+void SSD1322_SetCursor(int x, int y);
+void SSD1322_GetCursor(int *x, int *y);
+
 /* Scrolling line helper */
 typedef struct {
     char text[64];
@@ -75,9 +91,19 @@ void pixel_grid_test(void);
 /* Image / logo */
 void SSD1322_DisplayImage(const uint8_t *img);
 
+/* Enhanced bitmap and image functions */
+void SSD1322_Draw4bppBitmap(int x, int y, int width, int height, const uint8_t *bitmap);
+void SSD1322_DrawGrayscaleBitmap(int x, int y, int width, int height, const uint8_t *bitmap);
+
+/* Contrast and display control */
+void SSD1322_SetContrast(uint8_t contrast);
+void SSD1322_SetMasterContrast(uint8_t contrast);
+uint8_t SSD1322_GetContrast(void);
+
 /* Self-test (isteğe bağlı, remap vs denemesi) */
 void SSD1322_SelfTestRemap(void);
 void SSD1322_FillTestPattern(void);
+void SSD1322_ComprehensiveSelfTest(void);
 
 /* Gerekirse logon */
 extern const uint8_t NHD_Logo[];
